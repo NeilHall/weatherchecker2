@@ -19,7 +19,8 @@ function WeatherForm () {
           <CoordinateInput coordType="longitude" coordinate={longitude} handleCoordinate={handleLongitude} />
           
           <button
-            onClick={ async () => dispatch({
+            onClick={ 
+              async () => dispatch({
                     type: 'updateWeather',
                     newWeather: await GetWeatherForLocation(latitude, longitude)
                 })
