@@ -9,10 +9,11 @@ const CoordinateInput = (props) => {
             name={props.coordType}
             id={props.coordType}
             value={props.coordinate}
-            onChange={props.handleCoordinate}
+            onChange={props.onChange}
             />
         </>
     )
-};
+}
+
 
 export default CoordinateInput;

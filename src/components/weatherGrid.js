@@ -4,12 +4,11 @@ import isEmpty from "lodash/isEmpty";
 import dateFormat from "dateformat";
 import "./weatherGrid.css";
 
-const WeatherGrid = () => {
-  const [{ weatherData }] = useWeatherValue();
+const WeatherGrid = (props) => {
+  console.log(props.weatherData)
 
-  if (isEmpty(weatherData)) return null;
+  if (isEmpty(props.weatherData)) return null;
 
-  console.log(weatherData);
   return (
     <table className="tg">
       <tbody>
@@ -25,22 +24,22 @@ const WeatherGrid = () => {
           <th className="tg-0lax">Sunset</th>
         </tr>
         <tr>
-          <td className="tg-0lax">{weatherData.name}</td>
-          <td className="tg-0lax">{weatherData.weather[0].description}</td>
-          <td className="tg-0lax">{weatherData.main.temp}c</td>
-          <td className="tg-0lax">{weatherData.main.pressure} millibars</td>
-          <td className="tg-0lax">{weatherData.main.humidity} %</td>
-          <td className="tg-0lax">{weatherData.wind.speed} m/s</td>
-          <td className="tg-0lax">{weatherData.clouds.all}%</td>
+          <td className="tg-0lax">{props.weatherData.name}</td>
+          <td className="tg-0lax">{props.weatherData.weather[0].description}</td>
+          <td className="tg-0lax">{props.weatherData.main.temp}c</td>
+          <td className="tg-0lax">{props.weatherData.main.pressure} millibars</td>
+          <td className="tg-0lax">{props.weatherData.main.humidity} %</td>
+          <td className="tg-0lax">{props.weatherData.wind.speed} m/s</td>
+          <td className="tg-0lax">{props.weatherData.clouds.all}%</td>
           <td className="tg-0lax">
             {dateFormat(
-              new Date(weatherData.sys.sunrise * 1000),
+              new Date(props.weatherData.sys.sunrise * 1000),
               "h:MM:ss TT"
             ).toString()}
           </td>
           <td className="tg-0lax">
             {dateFormat(
-              new Date(weatherData.sys.sunset * 1000),
+              new Date(props.weatherData.sys.sunset * 1000),
               "h:MM:ss TT"
             ).toString()}
           </td>
