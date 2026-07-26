@@ -1,13 +1,11 @@
-import React from "react";
-import { useWeatherValue } from "./weatherProvider";
-import isEmpty from "lodash/isEmpty";
-import dateFormat from "dateformat";
 import "./weatherGrid.css";
 
-const WeatherGrid = (props) => {
-  console.log(props.weatherData)
+// ponytail: replaces dateformat's "h:MM:ss TT"
+const time = (unixSeconds) =>
+  new Date(unixSeconds * 1000).toLocaleTimeString("en-US");
 
-  if (isEmpty(props.weatherData)) return null;
+const WeatherGrid = (props) => {
+  if (!props.weatherData?.main) return null;
 
   return (
     <table className="tg">
@@ -31,18 +29,8 @@ const WeatherGrid = (props) => {
           <td className="tg-0lax">{props.weatherData.main.humidity} %</td>
           <td className="tg-0lax">{props.weatherData.wind.speed} m/s</td>
           <td className="tg-0lax">{props.weatherData.clouds.all}%</td>
-          <td className="tg-0lax">
-            {dateFormat(
-              new Date(props.weatherData.sys.sunrise * 1000),
-              "h:MM:ss TT"
-            ).toString()}
-          </td>
-          <td className="tg-0lax">
-            {dateFormat(
-              new Date(props.weatherData.sys.sunset * 1000),
-              "h:MM:ss TT"
-            ).toString()}
-          </td>
+          <td className="tg-0lax">{time(props.weatherData.sys.sunrise)}</td>
+          <td className="tg-0lax">{time(props.weatherData.sys.sunset)}</td>
         </tr>
       </tbody>
     </table>
